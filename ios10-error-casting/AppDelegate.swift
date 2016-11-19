@@ -18,7 +18,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
 
         let objc = ObjcClass()
+//        objc.handleError(SwiftErrorA.error1)
         objc.test1()
+        objc.testSwiftStructError()
+        
+
+        do {
+            try objc.throwingObjcError(withCode: 2)
+        } catch let e as ObjcError {
+            print("ObjcError: \(e) \(e.rawValue)")
+            switch e {
+            case .unknown:
+                print("ObjcError.unknown")
+            case .error1:
+                print("ObjcError.E1")
+            case .error100:
+                print("ObjcError.E100")
+            }
+        } catch let e {
+            print("Error: \(e)")
+        }
         
         return true
     }

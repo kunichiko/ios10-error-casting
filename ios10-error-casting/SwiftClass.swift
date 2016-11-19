@@ -8,6 +8,28 @@
 
 import Foundation
 
+extension ObjcError : _ObjectiveCBridgeableError {
+    public init?(_bridgedNSError error: NSError) {
+        guard error.domain == "ObjcError" else {
+            return nil
+        }
+        guard let e = ObjcError(rawValue: error.code) else {
+            return nil
+        }
+        
+        let normalize = { (expected: ObjcError, error:ObjcError) -> ObjcError in
+            return expected.rawValue == error.rawValue ? expected : ObjcError.unknown
+        }
+        switch e {
+        case .unknown:
+            self = normalize(ObjcError.unknown, e)
+        case .error1:
+            self = normalize(ObjcError.error1, e)
+        case .error100:
+            self = normalize(ObjcError.error100, e)
+        }
+    }
+}
 
 @objc class SwiftClass : NSObject {
     
@@ -52,15 +74,83 @@ import Foundation
         let rhs = error2.asSwiftError as NSError
         return lhs.domain == rhs.domain && lhs.code == rhs.code
     }
+
+
+    func throwingObjcError() throws {
+        throw ObjcError.unknown
+    }
+
+    func throwingStructError() throws {
+        throw StructError()
+    }
+
+    func handleError(_ error: Error) {
+        print("\(error.asSwiftError)")
+        
+        
+        if let error = error.asMyObjcError {
+            switch error {
+            case .unknown:
+                print("u")
+            case .error1:
+                print("1")
+            case .error2:
+                print("2")
+            }
+        }
+        if let error = error as? MyObjcError {
+            switch error {
+            case .unknown:
+                print("u")
+            case .error1:
+                print("1")
+            case .error2:
+                print("2")
+            }
+        }
+        print("\(error)")
+        let nserror = error as NSError
+        if nserror.domain == "ObjcError" {
+            switch nserror.code {
+            case ObjcError.error1.rawValue:
+                print("")
+            default:
+                ()
+            }
+        }
+    }
+}
+
+@objc
+enum MySwiftError : Int, Error {
+    case unknown
+    case error1
+    case error2
 }
 
 @objc(SwiftErrorA)
 enum SwiftErrorA : Int, Error {
-    case error1 = 1
-    case error2 = 2
+//enum SwiftErrorA : Error {
+    case error1
+    case error2
 //    case error3 = 3
 //    case error100 = 100
 //    case unknown = 101
+
+}
+
+extension SwiftErrorA {
+    var _domain: String {
+        return "MyDomain"
+    }
+    var _code: Int {
+        switch self {
+        case .error1:
+            return 1111
+        case .error2:
+            return 2222
+        }
+    }
 }
 
 @objc enum SwiftErrorB : Int, Error {
@@ -68,6 +158,17 @@ enum SwiftErrorA : Int, Error {
     case error1001 = 1001
 }
 
+struct StructError : Error {
+}
+
+/*extension SwiftErrorA : _ObjectiveCBridgeableError {
+    init?(_bridgedNSError error: NSError) {
+        if error.domain == "SceneServerError" {
+            return SwiftErrorA(rawValue: 0)
+        }
+        return nil
+    }
+}*/
 
 
 extension NSError {
@@ -90,3 +191,5 @@ extension Error {
         return SwiftErrorA.error1
     }
 }
+
+

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A81A0751DE05F0500B12787 /* MyObjcError+Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A81A0741DE05F0500B12787 /* MyObjcError+Swift.swift */; };
 		7AC573AF1DDF04610016906E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC573AE1DDF04610016906E /* AppDelegate.swift */; };
 		7AC573B11DDF04610016906E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC573B01DDF04610016906E /* ViewController.swift */; };
 		7AC573B41DDF04610016906E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AC573B21DDF04610016906E /* Main.storyboard */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7A81A0741DE05F0500B12787 /* MyObjcError+Swift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MyObjcError+Swift.swift"; sourceTree = "<group>"; };
 		7AC573AB1DDF04610016906E /* ios10-error-casting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios10-error-casting.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AC573AE1DDF04610016906E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7AC573B01DDF04610016906E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -65,6 +67,7 @@
 				7AC573C11DDF048F0016906E /* ObjcClass.h */,
 				7AC573C21DDF048F0016906E /* ObjcClass.m */,
 				7AC573C41DDF04E40016906E /* SwiftClass.swift */,
+				7A81A0741DE05F0500B12787 /* MyObjcError+Swift.swift */,
 				7AC573B21DDF04610016906E /* Main.storyboard */,
 				7AC573B51DDF04610016906E /* Assets.xcassets */,
 				7AC573B71DDF04610016906E /* LaunchScreen.storyboard */,
@@ -149,6 +152,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AC573B11DDF04610016906E /* ViewController.swift in Sources */,
+				7A81A0751DE05F0500B12787 /* MyObjcError+Swift.swift in Sources */,
 				7AC573C31DDF048F0016906E /* ObjcClass.m in Sources */,
 				7AC573C51DDF04E40016906E /* SwiftClass.swift in Sources */,
 				7AC573AF1DDF04610016906E /* AppDelegate.swift in Sources */,
@@ -320,6 +324,7 @@
 				7AC573BF1DDF04610016906E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
